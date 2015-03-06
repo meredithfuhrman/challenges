@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Massively Multiplayer Online Rock, Paper, Scissors</title>
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+    <h1>MMORPS</h1>
+
+    <% if !flash[:player_choice].nil? %>
+        <p><%= "You chose #{flash[:player_choice]}. Computer chose #{flash[:computer_choice]}.
+  #{flash[:round_result]} this round."%></p>
+    <% end %>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Player</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Human:</td><td><%= player_score %></td></tr>
+        <tr><td>Computer:</td><td><%= computer_score %></td></tr>
+      </tbody>
+    </table>
+
+    <% if winner.nil?%>
+      <form action="/choose" method="post">
+        <h2>Choose!</h2>
+
+        <input type="submit" name="player_choice" value="Rock">
+        <input type="submit" name="player_choice" value="Paper">
+        <input type="submit" name="player_choice" value="Scissors">
+      </form>
+
+      <% else %>
+        <p><%= winner %> wins!</p>
+        <form action="/reset" method="post">
+          <button>Play Again</button>
+        </form>
+      <% end %>
+  </body>
+</html>
