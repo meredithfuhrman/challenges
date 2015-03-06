@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'pg'
-require 'pry'
 
 ###########
 # Methods #
@@ -48,14 +47,6 @@ def get_ingredients
     db_connection { |conn| conn.exec(sql_ingredients, [params[:id]]).to_a}
 end
 
-#To split out instructions to more formattable code
-# def parse_instructions(recipes)
-#   instruction_array = []
-#   # recipes.each do |recipe|
-#   #     recipe["instructions"].delete!("\t").slice!("Method")
-#   #     instruction_array << recipe["instructions"].split("\n")
-#   end
-# end
 
 ##########
 # Routes #
@@ -73,8 +64,6 @@ end
 get '/recipes/:id' do
   recipe_details = get_recipe_details
   ingredients = get_ingredients
-  # instructions = parse_instructions(recipe_details)
 
   erb :'details', locals: {recipe_details: recipe_details, ingredients: ingredients}
-    # instructions: instructions}
 end
