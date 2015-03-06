@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= team_name %></title>
+</head>
+
+<body>
+  <h1>Team:  <%= team_name %></h1>
+
+  <h2> Roster: </h2>
+  <ul>
+    <% positions.each do |position, player| %>
+    <li><%= "#{position}:  #{player}" %></li>
+    <% end %>
+  </ul>
+</body>
+</html>

@@ -1,0 +1,20 @@
+* {font-family: 'Arial', 'Helvetica', 'Arial',sans-serif; }
+
+.header {
+  padding: 3px;
+  margin-bottom: 20px;
+  background-color: #FF5819;
+  }
+
+
+.top-bar-left {
+  font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
+  font-weight: bold;
+  color: white;
+  float: left;
+  }
+
+.top-bar-middle {
+  text-align: center;
+  font-weight: bold;
+}

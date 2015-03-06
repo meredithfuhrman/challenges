@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Recipes Assignment</title>
+  </head>
+
+  <body>
+    <h1>Recipe: <%= recipes[:name] %> </h1>
+    <br>
+    <h2>Ingredients </h2>
+      <ul>
+        <% recipes[:ingredients].each do |ingredient| %>
+          <li><%= ingredient %></li>
+        <% end %>
+      </ul>
+    <h2>Directions</h2>
+      <ol>
+        <% recipes[:directions].each.with_index(1) do |direction, index| %>
+          <li><%= "#{index}. #{direction}" %></li>
+        <% end %>
+      <ol>
+  </body>
+</html>

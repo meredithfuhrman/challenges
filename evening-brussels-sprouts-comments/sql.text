@@ -1,0 +1,30 @@
+#How many recipes are there in total?
+SELECT
+  COUNT (recipe_id)
+FROM
+  recipes;
+
+#How many comments are there in total?
+SELECT
+  COUNT (comment_id)
+FROM
+  comments;
+
+#How would you find out how many comments each of the recipes have
+SELECT
+  recipe_id,
+  COUNT (comment)
+FROM
+  comments
+GROUP BY
+  comment;
+
+#What is the name of the recipe that is associated with a specific comment?
+SELECT
+  recipe_id
+FROM
+  comments
+WHERE comment_id = 1;
+
+
+#Add a new recipe titled Brussels Sprouts with Goat Cheese. Add two comments to it.

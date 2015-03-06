@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= desired_position %></title>
+</head>
+
+<body>
+  <h1>Position:  <%= desired_position %></h1>
+
+  <h2> Players: </h2>
+  <ul>
+    <% player_list.each do |player| %>
+     <li><%= player %></li>
+    <% end %>
+  </ul>
+</body>
+</html>
