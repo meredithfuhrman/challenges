@@ -28,23 +28,23 @@ SELECT recipes.name, recipes.id, COUNT (ingredients.name) AS ingredient_count
 end
 
 #Get information about recipe
-def get_recipe_details
+def get_recipe_details(recipe_id)
   sql_recipe_details = <<-eos
   SELECT recipes.name, recipes.description, recipes.instructions
     FROM recipes WHERE recipes.id = $1;
     eos
-    db_connection {|conn| conn.exec(sql_recipe_details, [params[:id]]).to_a}
+    db_connection {|conn| conn.exec(sql_recipe_details, [recipe_id]).to_a}
 end
 
 #Get list of ingredients for recipe details
-def get_ingredients
+def get_ingredients(recipe_id)
   sql_ingredients = <<-eos
   SELECT ingredients.name AS ingredient
     FROM ingredients
     FULL OUTER JOIN recipes ON recipes.id = ingredients.recipe_id
     WHERE recipes.id = $1;
     eos
-    db_connection { |conn| conn.exec(sql_ingredients, [params[:id]]).to_a}
+    db_connection { |conn| conn.exec(sql_ingredients, [recipe_id]).to_a}
 end
 
 
@@ -62,8 +62,9 @@ end
 
 #Display page with details for specific recipe
 get '/recipes/:id' do
-  recipe_details = get_recipe_details
-  ingredients = get_ingredients
+  recipe_id = params[:id]
+  recipe_details = get_recipe_details(recipe_id)
+  ingredients = get_ingredients(recipe_id)
 
   erb :'details', locals: {recipe_details: recipe_details, ingredients: ingredients}
 end
