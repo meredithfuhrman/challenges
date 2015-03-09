@@ -1,28 +1,22 @@
 class Album
+  attr_accessor :id, :title, :artists, :tracks
+  
   def initialize (album_id, album_title, album_artists)
-    @album_id = album_id
-    @album_title = album_title
-    @album_artists = album_artists
-    @track = Array.new
-  end
-
-  def id
-    @album_id
-  end
-
-  def tracks
-    @track
+    @id = album_id
+    @title = album_title
+    @artists = album_artists
+    @tracks = Array.new
   end
 
   def track_list
     track_list = ""
-    @track.each { |track| track_list += "\t- #{track[:title]}\n"}
+    @tracks.each { |track| track_list += "\t- #{track.title}\n"}
     track_list
   end
 
   def duration_min
     album_duration_ms = 0
-    tracks.each {|track| album_duration_ms += track[:duration_ms].to_f}
+    @tracks.each {|track| album_duration_ms += track.duration_ms.to_f}
     album_duration_sec = album_duration_ms/1000
     Time.at(album_duration_sec).strftime("%M:%S")
   end
@@ -37,6 +31,21 @@ class Album
     #{track_list}
 
     summary
+  end
+end
+
+class Track
+  attr_accessor :album_id, :track_id, :title, :track_number, :duration_ms,
+    :album_title, :artists
+
+  def initialize (album_id, track_id, title, track_number, duration_ms, album_title, album_artists)
+    @album_id = album_id
+    @track_id = track_id
+    @title = title
+    @track_number = track_number
+    @duration_ms = duration_ms
+    @album_title = album_title
+    @artists = album_artists
   end
 
 end
