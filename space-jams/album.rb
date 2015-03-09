@@ -1,6 +1,6 @@
 class Album
   attr_accessor :id, :title, :artists, :tracks
-  
+
   def initialize (album_id, album_title, album_artists)
     @id = album_id
     @title = album_title
@@ -24,8 +24,8 @@ class Album
 
   def summary
     <<-summary
-    Name: #{@album_title}
-    Artist(s): #{@album_artists}
+    Name: #{@title}
+    Artist(s): #{@artists}
     Duration (min): #{duration_min}
     Tracks:
     #{track_list}
@@ -35,17 +35,14 @@ class Album
 end
 
 class Track
-  attr_accessor :album_id, :track_id, :title, :track_number, :duration_ms,
-    :album_title, :artists
+  attr_accessor :album_id, :track_id, :title, :track_number, :duration_ms
 
-  def initialize (album_id, track_id, title, track_number, duration_ms, album_title, album_artists)
+  def initialize (album_id, track_id, title, track_number, duration_ms)
     @album_id = album_id
     @track_id = track_id
     @title = title
     @track_number = track_number
     @duration_ms = duration_ms
-    @album_title = album_title
-    @artists = album_artists
   end
 
 end
