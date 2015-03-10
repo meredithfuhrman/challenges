@@ -32,7 +32,7 @@ class Recipe
   end
 
   def ingredients
-    Ingredients.all
+    Ingredient.all
     id = self.id
     @ingredients = Ingredient.find(id)
     @ingredients
