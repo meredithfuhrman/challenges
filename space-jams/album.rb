@@ -29,7 +29,6 @@ class Album
     Duration (min): #{duration_min}
     Tracks:
     #{track_list}
-
     summary
   end
 end
