@@ -13,26 +13,18 @@
   #{flash[:round_result]} this round."%></p>
     <% end %>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Player</th>
-          <th>Score</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Human:</td><td><%= player_score %></td></tr>
-        <tr><td>Computer:</td><td><%= computer_score %></td></tr>
-      </tbody>
-    </table>
+    <ul>
+      <li>Human:</td><td><%= player_score %></li>
+      <li>Computer:</td><td><%= computer_score %></li>
+    </ul>
+
 
     <% if winner.nil?%>
       <form action="/choose" method="post">
         <h2>Choose!</h2>
-
-        <input type="submit" name="player_choice" value="Rock">
-        <input type="submit" name="player_choice" value="Paper">
-        <input type="submit" name="player_choice" value="Scissors">
+        <input type="submit" name="choice" value="Rock">
+        <input type="submit" name="choice" value="Paper">
+        <input type="submit" name="choice" value="Scissors">
       </form>
 
       <% else %>

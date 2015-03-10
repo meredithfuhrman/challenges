@@ -1,11 +1,9 @@
 require "sinatra"
 require "sinatra/flash"
-require "rack"
 
 use Rack::Session::Cookie, {
   secret: "keep_it_secret_keep_it_safe",
 }
-
 
 def get_computer_choice
   computer = rand(3)
@@ -38,9 +36,8 @@ end
 
 
 get "/" do
-  erb :game, locals: { player_score: score(:player_score), computer_score: score(:computer_score),
-    winner: session[:winner]
-     }
+  erb :game, locals: { player_score: score(:player_score),
+    computer_score: score(:computer_score), winner: session[:winner]}
 end
 
 post "/reset" do
