@@ -1,4 +1,9 @@
 class Ingredient
+
+  ACCEPTABLE = [ "brussels sprouts", "spinach", "eggs", "milk",
+      "tofu", "seitan", "bell peppers", "quinoa",
+      "kale", "chocolate", "beer", "wine", "whiskey" ]
+
   def initialize(quantity, unit, name)
     @quantity = quantity
     @unit = unit
@@ -6,13 +11,7 @@ class Ingredient
   end
 
   def is_valid?
-    acceptable = [
-        "brussels sprouts", "spinach", "eggs", "milk",
-        "tofu", "seitan", "bell peppers", "quinoa",
-        "kale", "chocolate", "beer", "wine", "whiskey"
-        ]
-
-    acceptable.include?(@name.downcase)
+    ACCEPTABLE.include?(@name.downcase)
   end
 
   def self.parse(ingredient)
@@ -90,8 +89,7 @@ instructions = [
     "They should be until crisp on the outside and tender on the inside.",
     "Shake the pan from time to time to brown the sprouts evenly.",
     "Sprinkle with more kosher salt ( I like these salty like French fries).",
-    "Serve and enjoy!"
-    ]
+    "Serve and enjoy!"  ]
 
 #calling an instance of recipe class with recipe above
 recipe = Recipe.new(name, instructions, ingredients)
