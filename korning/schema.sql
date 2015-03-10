@@ -6,16 +6,6 @@ DROP TABLE IF EXISTS customers CASCADE;
 DROP TABLE IF EXISTS employees CASCADE;
 DROP TABLE IF EXISTS invoices CASCADE;
 
-CREATE TABLE invoice_frequencies (
-  id serial primary key,
-  frequency varchar(50)
-);
-
-CREATE TABLE sales_dates (
-  id serial primary key,
-  sales_date date
-);
-
 CREATE TABLE products (
   id serial primary key,
   product varchar(255)
@@ -38,9 +28,9 @@ CREATE TABLE invoices (
   invoice_no integer,
   sale_amount money,
   units_sold integer,
+  invoice_frequency varchar(255),
+  sale_date date,
   customer_id integer references customers(id),
-  invoice_frequency_id integer references invoice_frequencies(id),
-  sales_date integer references sales_dates(id),
   employee_id integer references employees(id),
   product_id integer references products(id)
   );
