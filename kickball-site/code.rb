@@ -6,26 +6,22 @@ file = File.read('roster.json')
 team_hash = JSON.parse(file)
 
 
-get "/:position" do
-  desired_position = params[:position]
+#To show teams page; testing having formatting loop on .erb file
+get "/:team" do
+  team_name = params[:team]
+  positions = team_hash[team_name]
 
-  player_list = {}
-
-  team_hash.each do |team, roster|
-    roster.select {|position, player| player_list.push(player) if position == desired_position}
-  end
-
-  erb :positionsite, locals: {player_list: player_list, desired_position: params[:position]}
+  erb :teamsite, locals: {positions: positions, team_name: team_name}
 end
 
+#To show optional positions page; testing having formatting loop in GET request
+get "/position/:position" do
+  desired_position = params[:position]
+  player_list = []
+  team_hash.each do |team_name, players|
+    player_list << "#{players[desired_position]}: #{team_name}"
+  end
 
-
-
-
-  # team_hash.each do |team, roster|
-  #   roster.select do |position, player|
-  #     if position == desired_position
-  #       player_list[team] = player
-  #     end
-  #   end
-  # end
+  erb :positionsite, locals: {desired_position: desired_position,
+    player_list: player_list}
+end
