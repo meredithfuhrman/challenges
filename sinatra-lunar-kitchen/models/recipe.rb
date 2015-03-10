@@ -1,16 +1,7 @@
-#Method to open connection to Recipes databases
-def db_connection
-  begin
-    connection = PG.connect(dbname: "recipes")
-    yield(connection)
-  ensure
-    connection.close
-  end
-end
-
-
 class Recipe
 #Constructor
+  attr_reader :id, :name, :instructions, :description
+
   def initialize(id, name, instructions, description)
     @id = id
     @name = name
@@ -19,41 +10,42 @@ class Recipe
     @ingredients = Array.new
   end
 
-  attr_reader :id, :name, :instructions, :description
-
 #Class methods
   def self.all
     sql_recipe_name = "SELECT * FROM recipes ORDER BY recipes.name;"
-    recipes = db_connection { |conn| conn.exec(sql_recipe_name)}.to_a
+    recipes = self.db_connection { |conn| conn.exec(sql_recipe_name)}.to_a
 
-    all_recipes = []
+    @recipes = []
     recipes.each do |recipe|
-      all_recipes << Recipe.new(recipe["id"], recipe["name"],recipe["instructions"],recipe["description"])
+      @recipes << Recipe.new(recipe["id"], recipe["name"],recipe["instructions"],recipe["description"])
     end
-    all_recipes
+    @recipes
   end
 
 
-  def self.find(id)
-    
+  def self.find(recipe_id)
+    @recipes.each do |row|
+      return row if row.id == recipe_id
+    end
+    Recipe.new(recipe_id, "Error", "This recipe doesn't have any instructions.",
+          "This recipe doesn't have a description.")
+  end
+
+  def ingredients
+    Ingredients.all
+    id = self.id
+    @ingredients = Ingredient.find(id)
+    @ingredients
+  end
+
+
+  def self.db_connection
+    begin
+      connection = PG.connect(dbname: "recipes")
+      yield(connection)
+    ensure
+      connection.close
+    end
   end
 
 end
-
-# def get_recipe_details(recipe_id)
-#   sql_recipe_details = <<-eos
-#   SELECT recipes.name, recipes.description, recipes.instructions
-#     FROM recipes WHERE recipes.id = $1;
-#     eos
-#     db_connection {|conn| conn.exec(sql_recipe_details, [recipe_id]).to_a}
-# end
-#
-# def get_ingredients(recipe_id)
-#   sql_ingredients = <<-eos
-#   SELECT ingredients.name AS ingredient
-#     FROM ingredients
-#     FULL OUTER JOIN recipes ON recipes.id = ingredients.recipe_id
-#     WHERE recipes.id = $1;
-#     eos
-#     db_connection { |conn| conn.exec(sql_ingredients, [recipe_id]).to_a}
-# end
