@@ -10,7 +10,7 @@ configure :development, :test do
 end
 
 get '/' do
-  erb :'index'
+  erb :index
 end
 
 get '/recipes' do
