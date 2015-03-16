@@ -39,6 +39,13 @@ describe Airplane do
         expect(my_plane.take_off).to eq('airplane launched')
       end
     end
+    context 'if engine_on is true and flying is trye' do
+      it 'return "airplane already launched"' do
+        my_plane.start
+        my_plane.take_off
+        expect(my_plane.take_off).to eq('airplane already launched')
+      end
+    end
   end
 
   describe '#landing'

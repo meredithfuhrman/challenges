@@ -19,9 +19,11 @@ class Airplane
   end
 
   def take_off
-    if @engine_on
+    if @engine_on && @flying == false
       @flying = true
       'airplane launched'
+    elsif @engine_on && @flying
+      'airplane already launched'
     else
       'airplane not started, please start'
     end
