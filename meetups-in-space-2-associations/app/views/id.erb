@@ -1,0 +1,21 @@
+<h2>Meetup Details:</h2>
+
+<h4><%= meetup.name %></h4>
+<table>
+  <tr>
+    <td><%= meetup.description %></td>
+    </tr>
+  <tr>
+    <td><%= meetup.location %></td>
+  </tr>
+</table>
+
+<form action='/join' method='post'>
+  <input type="submit" value='Join this Meetup'></button>
+  <input type="hidden" name="meetup_id"  value="<%= params[:meetup_id] %>" />
+</form>
+<br>
+<br>
+
+
+<a href="/meetups">Go back to meetup list!</a>
