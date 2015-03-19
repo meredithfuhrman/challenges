@@ -1,0 +1,31 @@
+<h1>These are Meetups: </h1>
+  <div>
+    <ul>
+      <% meetups.each do |meetup| %>
+        <li><a href="/<%= meetup.id %>"><%= meetup.name %></a></li>
+      <% end %>
+    </ul>
+  </div>
+
+<br>
+<br>
+  <div>
+    <form action="/new" method="post">
+      <div>
+        <label for="name">Name: </label>
+        <input type="text" id="name" name="meetup_name">
+      </div>
+
+      <div>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="meetup_description">
+      </div>
+      <div>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="meetup_location">
+      </div>
+      <div>
+        <input type="submit" value="Add Meetup">
+      </div>
+    </form>
+  </div>
