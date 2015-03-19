@@ -12,9 +12,6 @@ class Meetup < ActiveRecord::Base
     presence: true,
     length: { maximum: 255 }
 
-  validates :created_by,
-    presence: true
-
   has_many :members
   has_many :users, through: :members
 end

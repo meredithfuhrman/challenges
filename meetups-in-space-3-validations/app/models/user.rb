@@ -10,12 +10,10 @@ class User < ActiveRecord::Base
 
   validates :email,
     presence: true,
-    format: { with: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/}
+    format: { with: /\A([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})\z/}
 
   validates :avatar_url,
     presence: true
-
-
 
   has_many :members
   has_many :meetups, through: :members
