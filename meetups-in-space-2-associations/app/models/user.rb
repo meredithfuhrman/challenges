@@ -11,10 +11,10 @@ class User < ActiveRecord::Base
 
   def self.create_from_omniauth(auth)
     create(
-      provider: auth.provider,
-      uid: auth.uid,
-      email: auth.info.email,
-      username: auth.info.nickname,
+      provider: auth.provider, #presence; inclusion?
+      uid: auth.uid, #presence; format?
+      email: auth.info.email, #presence; formatting
+      username: auth.info.nickname, #presence
       avatar_url: auth.info.image
     )
   end
