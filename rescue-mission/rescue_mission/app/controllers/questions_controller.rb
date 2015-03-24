@@ -1,15 +1,15 @@
 class QuestionsController < ApplicationController
   def new
-    @question = Question.new
+    @question = current_user.questions.new
   end
 
   def create
     @question = Question.create(question_params)
     if @question.save
-      flash[:notice] = "Question added."
+      flash[:notice] = "Question added"
       redirect_to questions_path
     else
-      flash[:notice] = "Invalid entry."
+      flash[:notice] = "Invalid entry"
       redirect_to :back
     end
   end
@@ -24,6 +24,6 @@ class QuestionsController < ApplicationController
 
   protected
   def question_params
-    params.require(:question).permit(:title, :description)
+    params.require(:question).permit(:title, :description, :user_id)
   end
 end

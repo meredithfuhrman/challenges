@@ -7,6 +7,19 @@ feature 'post question', %Q{
   So that I can receive help from others
 } do
 
+  let!(:user) { FactoryGirl.create(:user) }
+  let!(:question) { FactoryGirl.create(:question) }
+  before :each do
+     sign_in user
+   end
+
+   def create_question(title, description)
+    visit new_question_path
+    fill_in('Title', with: title)
+    fill_in('Description', with: description)
+    click_button('Create Question')
+   end
+
   scenario 'visitor clicks link to post new question' do
     visit questions_path
     click_link('Post a Question')
@@ -15,16 +28,12 @@ feature 'post question', %Q{
   end
 
   scenario 'visitor provides valid question' do
-    question_title = "This is a Test Title for a Test Question"
-    question_description = "This is a test question that needs to be at least as long as one whole tweet. Tweet, tweet, tweet. Bullshit tweets for all. This is a test question that needs to be at least as long as one whole tweet. Tweet, tweet, tweet. Bullshit tweets for all."
+    question_title = question.title
+    question_description = question.description
 
-    visit new_question_path
-    fill_in('Title', with: question_title)
-    fill_in('Description', with: question_description)
+    create_question(question_title, question_description)
 
-    click_button('Create Question')
-
-    expect(page).to have_content('Question added.')
+    expect(page).to have_content('Question added')
     expect(page).to have_content(question.title)
   end
 
@@ -32,12 +41,15 @@ feature 'post question', %Q{
     question_title = "Too short"
     question_description = "Really way too short"
 
-    visit new_question_path
-    fill_in('Title', with: question_title)
-    fill_in('Description', with: question_description)
-    click_button('Create Question')
+    create_question(question_title, question_description)
 
-    expect(page).to have_content("Invalid entry.")
+    expect(page).to have_content("Invalid entry")
   end
+end
 
+def sign_in(user)
+  visit new_user_session_path
+  fill_in "Email", with: user.email
+  fill_in "Password", with: user.password
+  click_on "Log in"
 end

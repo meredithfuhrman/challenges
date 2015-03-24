@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-if Rails.env.development?
-  FactoryGirl.create(:question)
-  FactoryGirl.create(:answer)
-end
+# if Rails.env.development?
+#   FactoryGirl.create(:question)
+#   FactoryGirl.create(:answer)
+# end
