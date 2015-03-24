@@ -2,15 +2,35 @@
 <html>
 <head>
   <title>RescueMission</title>
+  <%= stylesheet_link_tag    'normalize' %>
+  <%= stylesheet_link_tag    'foundation.min' %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+      <li class="name">
+        <h1><%= link_to "Home", questions_path %></h1>
+      </li>
+    </ul>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-<%= yield %>
+    <section class="top-bar-section">
+      <ul class="right">
+          <li><%= link_to "Sign Up", new_user_registration_path %></li>
+          <li class="active"><%= link_to "Sign In", new_user_session_path %></li>
+          <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
+      </ul>
+
+    </section>
+  </nav>
+
+  <div class="row">
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
+  </div>
 
 </body>
 </html>
