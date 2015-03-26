@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   def index
-    @questions = Question.all
+    @questions = Question.all.reverse_order
   end
 
   def new
@@ -42,6 +42,16 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    question_id = params[:id]
+    @question = Question.find(question_id)
+    @answer = Answer.where("question_id = #{question_id}")
+    if @question.destroy
+      @answer.each do |a|
+        a.destroy
+      end
+    flash[:notice] = "Question deleted"
+    redirect_to questions_path
+    end
   end
 
   protected

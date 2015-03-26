@@ -22,7 +22,7 @@ feature 'post question', %Q{
 
   scenario 'visitor clicks link to post new question' do
     visit questions_path
-    click_link('Post a Question')
+    click_button('Post a Question')
 
     expect(page).to have_button('Create Question')
   end
@@ -45,11 +45,4 @@ feature 'post question', %Q{
 
     expect(page).to have_content("Invalid entry")
   end
-end
-
-def sign_in(user)
-  visit new_user_session_path
-  fill_in "Email", with: user.email
-  fill_in "Password", with: user.password
-  click_on "Log in"
 end

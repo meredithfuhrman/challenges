@@ -9,6 +9,15 @@
   </ul>
 <% end %>
 
-<%= link_to 'Post an Answer', new_question_answer_path %>
+<%= button_to "Post an Answer", {:controller => :answers,
+      :action => 'new', :id => @question.id }, :method => :get %>
 <br>
-<%= link_to 'Edit Question', edit_question_path(@question) %>
+
+<%= button_to "Edit Question", {:controller => :questions,
+      :action => 'edit', :id => @question.id }, :method => :get %>
+
+<br>
+
+<%= button_to "Delete Question", {:controller => :questions,
+      :action => 'destroy', :id => @question.id }, :method => :delete %>
+<br>

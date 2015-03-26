@@ -18,5 +18,6 @@
 
 
 <% if user_signed_in? %>
-<%= link_to 'Post a Question', new_question_path %>
+  <%= button_to "Post a Question", {:controller => :questions,
+      :action => 'new'}, :method => :get %>
 <% end %>

@@ -22,7 +22,7 @@ feature 'edit question', %Q{
 
    scenario 'visitor can get to edit question page from questions details page ' do
      visit question_answers_path(question)
-     click_link('Edit Question')
+     click_button('Edit Question')
      expect(page).to have_button('Repost Question')
    end
 
@@ -46,12 +46,4 @@ feature 'edit question', %Q{
    end
 
 
-end
-
-
-def sign_in(user)
-  visit new_user_session_path
-  fill_in "Email", with: user.email
-  fill_in "Password", with: user.password
-  click_on "Log in"
 end
