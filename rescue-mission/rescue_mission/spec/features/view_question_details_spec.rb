@@ -16,7 +16,7 @@ feature 'view question details', %Q{
   end
 
   scenario 'visitor views question details' do
-      visit question_path(question)
+      visit question_answers_path
       expect(page).to have_content(question.title)
       expect(page).to have_content(question.description)
   end

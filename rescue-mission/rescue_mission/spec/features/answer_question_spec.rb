@@ -14,26 +14,29 @@ feature 'answer question', %Q{
    end
 
    def create_answer(description)
-    visit question_path(question)
+    visit question_answers_path
     fill_in('Description', with: description)
     click_button('Create Answer')
    end
 
-  scenario "visitor posts answer from the question detail page" do
-    visit question_path(question)
+  scenario "visitor clicks button to post answer from the question detail page" do
+    question_answers_path
+    click_link('Post an Answer')
 
     expect(page).to have_button('Create Answer')
-    expect(page).to contain('Description')
   end
 
-  scenario "visitor must provide a description that >50 characters" do
+  scenario "visitor provides valid answer" do
+    description = answer.description
+    create_answer(description)
 
-
+    expect(page).to have_content('Answer added')
+    expect(page).to have_content(answer.description)
   end
 
   scenario "visitor receives errors for invalid input" do
-    answer_description = "Really way too short"
-    create_answer(answer_description)
+    description = "Really way too short"
+    create_answer(description)
     expect(page).to have_content("Invalid entry")
   end
 end

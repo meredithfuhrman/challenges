@@ -1,4 +1,4 @@
-<h1>Questions</h1>
+<h1>All Questions</h1>
 
 <% if !@questions.empty? %>
   <table>
@@ -9,7 +9,7 @@
     </tr>
     <% @questions.each do |question| %>
       <tr>
-        <td><%= link_to question.title, question_path(question) %></td>
+        <td><%= link_to question.title, question_answers_path(question) %></td>
         <td><%= question.created_at %></td>
       </tr>
     <% end %>

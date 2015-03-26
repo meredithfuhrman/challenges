@@ -1,14 +1,7 @@
-
-<%= form_for(@question) do |f| %>
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-
+<%= form_for [@question, @answer] do |f| %>
   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
-    <%= f.hidden_field :user_id %>
   </div>
 
   <div class="actions">

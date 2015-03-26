@@ -1,0 +1,10 @@
+<h2> Title: <%= @question.title %></h2>
+
+<p><%= @question.description %></p>
+
+
+<br>
+<p><%= @answers %>
+<br>
+
+<%= link_to 'Post an Answer', new_question_answer_path %>

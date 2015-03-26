@@ -28,20 +28,20 @@ feature 'post question', %Q{
   end
 
   scenario 'visitor provides valid question' do
-    question_title = question.title
-    question_description = question.description
+    title = question.title
+    description = question.description
 
-    create_question(question_title, question_description)
+    create_question(title, description)
 
     expect(page).to have_content('Question added')
     expect(page).to have_content(question.title)
   end
 
   scenario 'visitor provides invalid information' do
-    question_title = "Too short"
-    question_description = "Really way too short"
+    title = "Too short"
+    description = "Really way too short"
 
-    create_question(question_title, question_description)
+    create_question(title, description)
 
     expect(page).to have_content("Invalid entry")
   end
