@@ -3,8 +3,12 @@
 <p><%= @question.description %></p>
 
 
-<br>
-<p><%= @answers %>
-<br>
+<% @answers.each do |answer| %>
+  <ul>
+    <li><%= answer.description %></li>
+  </ul>
+<% end %>
 
 <%= link_to 'Post an Answer', new_question_answer_path %>
+<br>
+<%= link_to 'Edit Question', edit_question_path(@question) %>

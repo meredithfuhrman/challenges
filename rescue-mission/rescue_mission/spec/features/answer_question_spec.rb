@@ -9,18 +9,19 @@ feature 'answer question', %Q{
 
   let!(:user) { FactoryGirl.create(:user) }
   let!(:question) { FactoryGirl.create(:question) }
+  let!(:answer) { FactoryGirl.create(:answer, question: question) }
   before :each do
      sign_in user
    end
 
    def create_answer(description)
-    visit question_answers_path
+    visit new_question_answer_path(question)
     fill_in('Description', with: description)
     click_button('Create Answer')
    end
 
   scenario "visitor clicks button to post answer from the question detail page" do
-    question_answers_path
+    visit question_answers_path(question)
     click_link('Post an Answer')
 
     expect(page).to have_button('Create Answer')
@@ -29,7 +30,6 @@ feature 'answer question', %Q{
   scenario "visitor provides valid answer" do
     description = answer.description
     create_answer(description)
-
     expect(page).to have_content('Answer added')
     expect(page).to have_content(answer.description)
   end

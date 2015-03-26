@@ -13,6 +13,6 @@ FactoryGirl.define do
   factory :answer do
       description "This is a test answer that needs to be as long as a third of a tweet"
       question
-      answer
+      user
   end
 end

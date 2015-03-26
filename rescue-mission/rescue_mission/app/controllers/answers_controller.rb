@@ -10,7 +10,7 @@ class AnswersController < ApplicationController
   end
 
   def create
-    answer =  answer_params
+    answer = answer_params
     answer[:user_id] = current_user.id
     answer[:question_id] = params[:question_id]
 

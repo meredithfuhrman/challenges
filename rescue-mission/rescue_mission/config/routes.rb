@@ -4,10 +4,9 @@ Rails.application.routes.draw do
 
   resources :questions
 
-  resources :questions, except: [:update] do
+  resources :questions do
     resources :answers, only: [:index, :new, :create]
   end
 
   resources :answers
-
 end
