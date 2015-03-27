@@ -1,0 +1,22 @@
+<h2> Restaurant: <%= @restaurant.name %></h2>
+
+<p><%= @restaurant.address %></p>
+<p><%= @restaurant.city %>, <%= @restaurant.state %> <%= @restaurant.zipcode %></p>
+<p><%= @restaurant.description %></p>
+<p><%= @restaurant.category %></p>
+
+<% @reviews.each do |review| %>
+  <div class="review">
+    <p>Rating: <%= review.rating %></p>
+    <p>Review: <%= review.body %></p>
+    <p>Timestamp: <%= review.created_at %></p>
+    <br>
+  </div>
+<% end %>
+
+
+<%= link_to "Add a review", new_restaurant_review_path(@restaurant) %>
+<br>
+<br>
+<%= button_to "Back to Restaurant List", {:controller => :restaurants,
+      :action => 'index'}, :method => :get %>

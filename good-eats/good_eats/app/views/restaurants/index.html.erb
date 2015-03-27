@@ -1,0 +1,18 @@
+<h1>All Restaurants</h1>
+
+<% if !@restaurants.empty? %>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th></th>
+    </tr>
+    <% @restaurants.each do |restaurant| %>
+      <tr>
+        <td><%= link_to restaurant.name, restaurant_path(restaurant) %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<%= button_to "Add New Restaurant", {:controller => :restaurants,
+      :action => 'new'}, :method => :get %>

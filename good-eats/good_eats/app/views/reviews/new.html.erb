@@ -1,0 +1,19 @@
+<h1> Tell Us About This Restaurant!</h1>
+
+<h3> Rate it from 1 to 5 and leave a review</h1>
+
+<%= form_for [@restaurant, @review] do |f| %>
+  <div class="field">
+    <%= f.label :rating %><br>
+    <%= f.text_field :rating %>
+  </div>
+
+  <div class="field">
+    <%= f.label :body %><br>
+    <%= f.text_field :body %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
